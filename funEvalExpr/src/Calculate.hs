@@ -2,8 +2,16 @@ module Calculate
     ( calculate
     ) where
 
+import Add
+import Sub
+
 do_calculate elem = do
-    print "Let's code it !"
+    let first = read (head elem)::Int
+    let second = read (elem !! 2)::Int
+    case elem !! 1 of
+        "+" -> print (add first second)
+        "-" -> print (sub first second)
+        _ -> print "Another operation"
 
 calculate elem = do
     let word_tab = words elem

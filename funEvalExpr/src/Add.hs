@@ -2,6 +2,5 @@ module Add
     ( add
     ) where
 
-{-add :: IO ()-}
-add elem = do
-    print elem
+add :: Int -> Int -> Int
+add first second = first + second
