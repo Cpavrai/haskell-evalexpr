@@ -4,18 +4,13 @@ module MainFunc
 
 import System.Environment
 import Data.List
+import Calculate
 
 mainFunc :: IO ()
 
 mainFunc = do
     args <- getArgs
-    if null args
-        then print "Need one argument atleast"
-    else do
-        print (args !! 1)
-        print (args !! 2)
-{-    if args[1] == '+'
-        then print add args
-        else
-            print "New fonction to code"
--}
+    case length args of
+        0 -> error "Need an argument"
+        1 -> calculate (args !! 0)
+        _ -> error "Only argument needed"
