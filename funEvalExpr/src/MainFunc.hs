@@ -9,7 +9,13 @@ mainFunc :: IO ()
 
 mainFunc = do
     args <- getArgs
-    print args
-{-   args <- getArgs
-   mapM putStrLn args
+    if null args
+        then print "Need one argument atleast"
+    else do
+        print (args !! 1)
+        print (args !! 2)
+{-    if args[1] == '+'
+        then print add args
+        else
+            print "New fonction to code"
 -}
