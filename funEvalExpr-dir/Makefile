@@ -1,10 +1,9 @@
-BIN = .stack-work/install/1e01afab/bin/funEvalExpr-exe
-
 ifeq ($(OS),Windows_NT)
 	EXEC = ../funEvalExpr.exe
 	BIN = .stack-work/install/1e01afab/bin/funEvalExpr-exe.exe
 else
 	EXEC = ../funEvalExpr
+	BIN = .stack-work/install/x86_64-linux/lts-9.18/8.0.2/bin/funEvalExpr-exe
 endif
 
 
