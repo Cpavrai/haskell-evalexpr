@@ -1,10 +1,10 @@
 BIN = .stack-work/install/1e01afab/bin/funEvalExpr-exe
 
 ifeq ($(OS),Windows_NT)
-	EXEC = funEvalExpr.exe
+	EXEC = ../funEvalExpr.exe
 	BIN = .stack-work/install/1e01afab/bin/funEvalExpr-exe.exe
 else
-	EXEC = funEvalExpr
+	EXEC = ../funEvalExpr
 endif
 
 
@@ -18,7 +18,7 @@ all: $(EXEC)
 
 $(EXEC):
 	$(BUILD)
-	$(CP) $(BIN) ../funEvalExpr.exe
+	$(CP) $(BIN) $(EXEC)
 
 clean:
 	$(RM) $(EXEC)
