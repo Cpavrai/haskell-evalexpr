@@ -2,5 +2,5 @@ module Div
     ( divd
     ) where
 
-divd :: Int -> Int -> Int
-divd first second = first `div` second
+divd :: Double -> Double -> Double
+divd first second = first / second

@@ -3,21 +3,22 @@ module Calculate
     ) where
 
 import Data.List
+import Text.Printf
 import Add
 import Sub
 import Mul
 import Div
 import Pow
 
-add_oper :: [Int] -> [String] -> [String] -> ([Int], [String])
+add_oper :: [Double] -> [String] -> [String] -> ([Double], [String])
 add_oper digi oper elem = case elem of
     [] -> ((reverse digi), (reverse oper))
     _ -> add_digi digi ((head elem):oper) (tail elem)
 
-add_digi :: [Int] -> [String] -> [String] -> ([Int], [String])
-add_digi digi oper elem = add_oper ((read (head elem)::Int):digi) oper (tail elem)
+add_digi :: [Double] -> [String] -> [String] -> ([Double], [String])
+add_digi digi oper elem = add_oper ((read (head elem)::Double):digi) oper (tail elem)
 
-do_calculate :: ([Int], [String]) -> IO()
+do_calculate :: ([Double], [String]) -> IO()
 do_calculate elem = case elem of
     (digit, operators) -> case (findIndex (== "^") operators) of
         Nothing -> case (findIndex (== "/") operators) of
@@ -25,7 +26,8 @@ do_calculate elem = case elem of
                 Nothing -> case findIndex (== "-") operators of
                     Nothing -> case findIndex (== "+") operators of
                         Nothing -> do
-                            print (head digit)
+                            let result = head digit
+                            putStrLn . printf "%.2f" $ result
                         Just n -> do
                             let adder = add (digit!!n) (digit!!(n+1))
                             let (ys,zs) = splitAt n digit

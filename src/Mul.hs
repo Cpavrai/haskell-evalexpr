@@ -2,5 +2,5 @@ module Mul
     ( mul
     ) where
 
-mul :: Int -> Int -> Int
+mul :: Double -> Double -> Double
 mul first second = first * second

@@ -2,5 +2,5 @@ module Add
     ( add
     ) where
 
-add :: Int -> Int -> Int
+add :: Double -> Double -> Double
 add first second = first + second

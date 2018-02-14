@@ -2,5 +2,5 @@ module Sub
     ( sub
     ) where
 
-sub :: Int -> Int -> Int
+sub :: Double -> Double -> Double
 sub first second = first - second
