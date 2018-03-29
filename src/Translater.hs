@@ -7,6 +7,7 @@ module Translater
 import Parser
 
 data Interpretation = Addition Operator Interpretation Interpretation
+                    | Multiplication Operator Interpretation Interpretation
                     | Number Double
                     deriving (Show)
 
@@ -27,20 +28,23 @@ factor t = let (leftTree, rest) = power t in
                 otherwise                        -> (leftTree, rest)
 
 
-term :: [Item] -> (Interpretation, [Item])
-term t = let (leftTree, rest) = factor t in
-            case rest of 
-              ((TOperator op):t) | elem op [Times, Div] -> let (rightTree, rest') = term t in ((ProdNode op leftTree rightTree), rest')
-              otherwise                                 -> (leftTree, rest)
 -}
+factor :: [Item] -> (Interpretation, [Item])
+factor ((MyNumber nb):t) = ((Number (fromIntegral nb)), t)
 
 term :: [Item] -> (Interpretation, [Item])
-term ((MyNumber nb):t) = ((Number (fromIntegral nb)), t)
+term t = let (leftTree, rest) = factor t in
+        case rest of
+            ((MyOperator operator_one):t) | elem operator_one [Mul, Div] -> let (rightTree, rest') = term t in
+                ((Multiplication operator_one leftTree rightTree), rest')
+            _ -> (leftTree, rest)
+
 
 expression :: [Item] -> (Interpretation, [Item])
 expression t = let (leftTree, rest) = term t in
                 case rest of
-                    ((MyOperator op):t) | elem op [Add, Subs] -> let (rightTree, rest') = expression t in ((Addition op leftTree rightTree), rest')
+                    ((MyOperator operator_one):t) | elem operator_one [Add, Subs] -> let (rightTree, rest') = expression t in
+                        ((Addition operator_one leftTree rightTree), rest')
                     _ -> (leftTree, rest)
 
 translater :: [Item] -> Interpretation

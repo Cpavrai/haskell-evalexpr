@@ -9,18 +9,16 @@ import Translater
 
 compute :: Interpretation -> Double
 
-compute (Addition op leftOne rightOne) | op == Add = (compute leftOne) + (compute rightOne)
-                                       | op == Subs = (compute leftOne) - (compute rightOne)
+compute (Addition operator_one leftOne rightOne) | operator_one == Add = (compute leftOne) + (compute rightOne)
+                                                 | operator_one == Subs = (compute leftOne) - (compute rightOne)
 
-compute (Multiplication op leftOne rightOne) | op == Add = (compute leftOne) + (compute rightOne)
-                                       | op == Subs = (compute leftOne) - (compute rightOne)
-
-{-compute (Addition op leftOne rightOne) | op == Add = (compute leftOne) + (compute rightOne)
-                                       | op == Subs = (compute leftOne) - (compute rightOne)-}
+compute (Multiplication operator_one leftOne rightOne) | operator_one == Mul = (compute leftOne) * (compute rightOne)
+                                                       | operator_one == Div = let divider = compute rightOne in
+                                                                        case divider of 
+                                                                        divider | divider /= 0.0 -> (compute leftOne) / divider
+                                                                        otherwise -> error ("Division by zero")
 
 compute (Number nb) = nb
-
-
 
 do_calculate :: String -> Double
 do_calculate = compute . translater . parser
