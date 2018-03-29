@@ -13,4 +13,4 @@ mainFunc = do
     case length args of
         0 -> error "Need an argument"
         1 -> calculate (args !! 0)
-        _ -> error "Only argument needed"
+        _ -> error "Only one argument needed"
