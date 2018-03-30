@@ -8,29 +8,29 @@ import Parser
 
 data Interpretation = Addition Operator Interpretation Interpretation
                     | Multiplication Operator Interpretation Interpretation
+                    | Powering Operator Interpretation Interpretation
+                    | Unary Operator Interpretation
                     | Number Double
                     deriving (Show)
 
-{-power :: [Item] -> (Interpretation, [Item])
-power ((TNumber nb):t) = ((NumNode (fromIntegral nb)), t)
-power ((TOperator op):t) | elem op [Plus, Minus] = let (tree , rest) = power t in ((UnaryNode op tree), rest)
-                         | op == PLeft = let (tree, rest) = expression t in
-                                            case rest of
-                                              ((TOperator op):rest) | op == PRight -> (tree, rest)
-                                              otherwise -> error $ "Mismatching parenthesis"
+power :: [Item] -> (Interpretation, [Item])
+power ((MyNumber nb):t) = ((Number (fromIntegral nb)), t)
+power ((MyOperator op):t) | elem op [Add, Subs] = let (tree , rest) = power t in
+                              ((Unary op tree), rest)
+                          | op == ParB = let (tree, rest) = expression t in
+                                case rest of
+                                    ((MyOperator op):rest) | op == ParE -> (tree, rest)
+                                    otherwise -> error $ "Mismatching parenthesis"
 power t | otherwise = error $ "Empty Tokens"
 
 factor :: [Item] -> (Interpretation, [Item])
-factor ((TOperator op):t) | op == Root = let (tree, rest) = factor t in ((PowNode op tree (NumNode 0.5)), rest)
+factor ((MyOperator operator_one):t) | operator_one == Root = let (tree, rest) = factor t in ((Powering operator_one tree (Number 0.5)), rest)
 factor t = let (leftTree, rest) = power t in
-              case rest of 
-                ((TOperator op):t) | op == Power -> let (rightTree, rest') = factor t in ((PowNode op leftTree rightTree), rest')
-                otherwise                        -> (leftTree, rest)
+            case rest of 
+                ((MyOperator operator_one):t) | operator_one == Pow -> let (rightTree, rest') = factor t in ((Powering operator_one leftTree rightTree), rest')
+                _ -> (leftTree, rest)
 
 
--}
-factor :: [Item] -> (Interpretation, [Item])
-factor ((MyNumber nb):t) = ((Number (fromIntegral nb)), t)
 
 term :: [Item] -> (Interpretation, [Item])
 term t = let (leftTree, rest) = factor t in

@@ -11,8 +11,10 @@ data Operator = Add
             | Subs
             | Mul
             | Div
-            | Power
+            | Pow
             | Root
+            | ParB
+            | ParE
             deriving (Show, Eq)
 
 data Item = MyOperator Operator
@@ -25,11 +27,15 @@ translate_operator c = case c of
             '-' -> Subs
             '*' -> Mul
             '/' -> Div
+            '^' -> Pow
+            'v' -> Root
+            '(' -> ParB
+            ')' -> ParE
             _ -> error ("Unknown operator")
 
 parser :: String -> [Item]
 parser [] = []
-parser (h:t) | elem h "+-*/" = MyOperator (translate_operator h) : parser t
+parser (h:t) | elem h "+-*/^v()" = MyOperator (translate_operator h) : parser t
              | isDigit h = let (numbers, rest) = span isDigit (h:t) in
                                 MyNumber (read numbers) : parser rest
              | isSpace h = parser t
