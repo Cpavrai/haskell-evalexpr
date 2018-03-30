@@ -26,7 +26,7 @@ first ((MyOperator op):t) | elem op [Add, Subs] = let (tree , rest) = first t in
 
 second :: [Item] -> (Interpretation, [Item])
 second ((MyOperator operator_one):t) | operator_one == Root = let (tree, rest) = second t in
-                                                                ((Powering operator_one tree (Number 0.5)), rest)
+                                                                ((Powering Pow tree (Number 0.5)), rest)
 
 second t = let (tree, rest) = first t in
             case rest of 
