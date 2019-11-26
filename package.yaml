@@ -1,6 +1,6 @@
 name:                funEvalExpr
 version:             1.0.0.0
-# github:              "githubuser/funEvalExpr"
+github:              Cpavrai/funEvalExpr
 license:             BSD3
 author:              "Charles Parmentier & Sophie Pomerole"
 maintainer:          "charles.parmentier@epitech.eu"
@@ -8,7 +8,7 @@ copyright:           "2017 Charles PARMENTIER & Sophie POMEROLE"
 
 # Metadata used when publishing your package
 synopsis:            Parser in PEG for doing every operations
-# category:            Web
+category:            Computer Science
 
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
