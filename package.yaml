@@ -1,10 +1,10 @@
 name:                funEvalExpr
-version:             1.0.0.0
+version:             1.0.0.1
 github:              Cpavrai/funEvalExpr
 license:             BSD3
-author:              "Charles Parmentier & Sophie Pomerole"
-maintainer:          "charles.parmentier@epitech.eu"
-copyright:           "2017 Charles PARMENTIER & Sophie POMEROLE"
+author:              Cpavrai
+maintainer:          https://github.com/Cpavrai
+copyright:           "2017 Cpavrai"
 
 # Metadata used when publishing your package
 synopsis:            Parser in PEG for doing every operations
