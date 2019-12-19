@@ -4,6 +4,8 @@ module Calculate
 
 import Data.List
 import Text.Printf
+
+import Utils.Clean
 import Compute
 import Translater
 import Parser
@@ -12,7 +14,8 @@ do_calculate :: String -> Double
 do_calculate = compute . translater . parser
 
 calculate elem = do
-    let word_tab = words elem
+    let clean_elem = clean elem
+    let word_tab = words clean_elem
     let digi = []
     let oper = []
     case length word_tab of
